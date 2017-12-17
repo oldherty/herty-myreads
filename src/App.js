@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-// import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
-import ListBooks from './ListBooks.js'
+import Bookshelves from './Bookshelves.js'
 import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends Component {
@@ -35,6 +35,7 @@ class BooksApp extends Component {
             this.setState({ books })
         })
     }
+
     changeShelf = (theBook, newShelf) => {
         BooksAPI.update(theBook, newShelf)
         BooksAPI.getAll().then( (books) => {
@@ -45,10 +46,19 @@ class BooksApp extends Component {
     render() {
         return (
             <div className="app">
-                {this.state.showSearchPage ? (
+                <Route exact path='/' render={() => (
+                    <div className="list-books-wrapper">
+                        <Bookshelves 
+                            books={this.state.books} 
+                            shelves={this.state.shelves} 
+                            onMoveBook={this.changeShelf} 
+                        />
+                    </div>
+                )} />
+                <Route path='/search' render={({ history }) => (
                     <div className="search-books">
                         <div className="search-books-bar">
-                            <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+                            <Link className="close-search" to="/">Close</Link>
                             <div className="search-books-input-wrapper">
                                 {/*
                                     NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -66,15 +76,7 @@ class BooksApp extends Component {
                             <ol className="books-grid"></ol>
                         </div>
                     </div>
-                ) : (
-                    <div className="list-books-wrapper">
-                        <ListBooks 
-                            books={this.state.books} 
-                            shelves={this.state.shelves} 
-                            onMoveBook={this.changeShelf} 
-                        />
-                    </div>
-                )}
+                )} />
             </div>
         )
     }

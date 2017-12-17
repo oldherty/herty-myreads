@@ -135,6 +135,9 @@ body, .app {
 .book-authors span:not(:last-child):after {
     content: ', ';
 }
+.book-authors span:not(:last-child):after {
+    content: ', ';
+}
 
 .book-top {
     position: relative;

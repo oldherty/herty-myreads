@@ -25,7 +25,7 @@ class ListBooks extends Component {
                               backgroundImage: `url(${book.imageLinks.thumbnail})` 
                             }}></div>
                             <div className="book-shelf-changer">
-                              <select onChange={(chosen) => onMoveBook(book, chosen.value)}>
+                              <select onChange={(chosen) => onMoveBook(book, "currentlyReading")}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -35,9 +35,11 @@ class ListBooks extends Component {
                             </div>
                           </div>
                           <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors.map( (author) => (
+                          <div className="book-authors">
+                          {book.authors.map( (author) => (
                             <span key={book.id}>{author}</span>
-                          ))}</div>
+                          ))}
+                          </div>
                         </div>
                       </li>
                     ))}

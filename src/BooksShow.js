@@ -9,11 +9,13 @@ class ShowBooks extends Component {
         console.log(shelf)
         console.log(books)
         
-        if( books !== undefined ) {
-            const showBooks = books.filter( (books) => books.shelf === shelf )
-        } else {
-            const showBooks = books
-        }
+        /* Necessary for search to actually work with this component
+            if( books !== undefined ) {
+                const showBooks = books.filter( (books) => books.shelf === shelf )
+            } else {
+                const showBooks = books
+            }
+        */
 
         return (
             <ol className="books-grid">

@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import ShowBooks from './ShowBooks.js'
+import ShowBooks from './BooksShow.js'
 
 class Bookshelves extends Component {
-
     render() {
         const {books, shelves, onMoveBook} = this.props
-
         return (
             <div className="list-books">
                 <div className="list-books-title">

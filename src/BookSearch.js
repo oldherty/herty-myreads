@@ -23,7 +23,7 @@ class SearchBooks extends Component {
     }
 
     render() {
-        const { books, onMoveBook } = this.props
+        const { books, onMoveBook, searchTerms } = this.props
         const { query, bookResults } = this.state
 
         return (
@@ -37,6 +37,17 @@ class SearchBooks extends Component {
                             value={query}
                             onChange={(event) => this.updateQuery(event.target.value)}
                         />
+                    </div>
+                    <div className="search-limitations-disclaimer">
+                        <label>Since this is just a demo, the search terms you can use are limited. "Hey," you might say, "that kind of defeats the purpose of typing, doesn't it?" It does indeed. Therefore, if your fingers are tired, feel free to pick the sanctioned terms from this list here instead.</label>
+                        <select 
+                            value={query}
+                            onChange={(event) => this.updateQuery(event.target.value)}
+                        >
+                        {searchTerms.map( (term) => (
+                            <option key={term} value={term}>{term}</option>
+                        ))}
+                        </select>
                     </div>
                 </div>
                 <div className="search-books-results">

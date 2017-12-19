@@ -26,7 +26,7 @@ function OneBook(props) {
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">
-                {book.authors.map( (author) => (
+                {book.authors !== undefined && book.authors.map( (author) => (
                     <span key={author}>{author}</span>
                 ))}
                 </div>

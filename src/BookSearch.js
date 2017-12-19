@@ -14,7 +14,11 @@ class SearchBooks extends Component {
             query: tipi.trim()
         })
         BooksAPI.search(tipi, 10).then( (bookResults) => {
-            this.setState({ bookResults })
+            if( !bookResults.error) {
+                this.setState({ bookResults })
+            } else {
+                this.setState({ bookResults: [] })
+            }
         })
     }
 

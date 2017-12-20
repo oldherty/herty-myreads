@@ -23,7 +23,7 @@ class SearchBooks extends Component {
     }
 
     render() {
-        const { books, onMoveBook, searchTerms } = this.props
+        const { onMoveBook, searchTerms } = this.props
         const { query, bookResults } = this.state
 
         return (

@@ -47,6 +47,11 @@ class BooksApp extends Component {
             BooksAPI.getAll().then( (books) => {
                 this.setState({ books })
             })
+            if(newShelf === "none") {
+                alert(`'${theBook.title}' has been removed from all shelves.`)
+            } else {
+                alert(`'${theBook.title}' has been added to the ${newShelf} shelf.`)
+            }
         })
     }
     render() {

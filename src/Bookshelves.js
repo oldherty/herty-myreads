@@ -3,8 +3,22 @@ import { Link } from 'react-router-dom'
 import OneShelf from './OneShelf.js'
 
 function Bookshelves(props) {
-    const {books, shelves, onMoveBook} = props
-    
+    const {books, onMoveBook} = props
+    const shelves = [
+        {
+            id: "currentlyReading",
+            title: "Currently Reading",
+        },
+        {
+            id: "wantToRead",
+            title: "Want to Read",
+        },
+        {
+            id: "read",
+            title: "Read",
+        },
+    ]
+
     return (
         <div className="list-books">
             <div className="list-books-title">

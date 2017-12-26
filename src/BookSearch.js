@@ -26,10 +26,14 @@ class SearchBooks extends Component {
             query: tipi
         })
         const shelvedBuks = this.props.books
-        BooksAPI.search(tipi.trim(), 10).then( 
-            (bookResults) => this.refreshShelves(bookResults, shelvedBuks), 
-            () => this.setState({ bookResults: [] })
-        )
+        if( tipi.length > 0 ) {
+            BooksAPI.search(tipi.trim(), 10).then( 
+                (bookResults) => this.refreshShelves(bookResults, shelvedBuks), 
+                () => this.setState({ bookResults: [] })
+            )
+        } else {
+            this.setState({ bookResults: [] })
+        }
     }
 
     render() {

@@ -26,13 +26,10 @@ class SearchBooks extends Component {
             query: tipi
         })
         const shelvedBuks = this.props.books
-        BooksAPI.search(tipi.trim(), 10).then( (bookResults) => {
-            if( !bookResults.error) {
-                this.refreshShelves(bookResults, shelvedBuks)
-            } else {
-                this.setState({ bookResults: [] })
-            }
-        })
+        BooksAPI.search(tipi.trim(), 10).then( 
+            (bookResults) => this.refreshShelves(bookResults, shelvedBuks), 
+            () => this.setState({ bookResults: [] })
+        )
     }
 
     render() {
@@ -67,7 +64,7 @@ class SearchBooks extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                    {bookResults.map( (result) => (
+                    {bookResults !== undefined && bookResults.map( (result) => (
                         <OneBook key={result.id} book={result} onMoveBook={onMoveBook} />
                     ))}
                     </ol>

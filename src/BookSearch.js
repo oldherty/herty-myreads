@@ -9,13 +9,26 @@ class SearchBooks extends Component {
         bookResults: [],
     }
 
+    refreshShelves = (results, shelved) => {
+        for (const buk in shelved) {
+            const bukid = shelved[buk].id
+            const bukShelf = shelved[buk].shelf
+            for (const book in results) {
+                if( results[book].id === bukid ) {
+                    results[book].shelf = bukShelf
+                }
+            }
+        }
+        this.setState({ bookResults: results })
+    }
     updateQuery = (tipi) => { 
         this.setState({
-            query: tipi.trim()
+            query: tipi
         })
-        BooksAPI.search(tipi, 10).then( (bookResults) => {
+        const shelvedBuks = this.props.books
+        BooksAPI.search(tipi.trim(), 10).then( (bookResults) => {
             if( !bookResults.error) {
-                this.setState({ bookResults })
+                this.refreshShelves(bookResults, shelvedBuks)
             } else {
                 this.setState({ bookResults: [] })
             }
@@ -23,9 +36,8 @@ class SearchBooks extends Component {
     }
 
     render() {
-        const { onMoveBook, searchTerms } = this.props
+        const { books, onMoveBook, searchTerms } = this.props
         const { query, bookResults } = this.state
-
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -42,7 +54,10 @@ class SearchBooks extends Component {
                         <label>Since this is just a demo, the search terms you can use are limited. "Hey," you might say, "that kind of defeats the purpose of typing, doesn't it?" It does indeed. Therefore, if your fingers are tired, feel free to pick the sanctioned terms from this list here instead.</label>
                         <select 
                             value={query}
-                            onChange={(event) => this.updateQuery(event.target.value)}
+                            onChange={(event) => {
+                                this.updateQuery(event.target.value)
+                                this.refreshShelves(bookResults, books)
+                            }}
                         >
                         {searchTerms.map( (term) => (
                             <option key={term} value={term}>{term}</option>

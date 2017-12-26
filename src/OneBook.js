@@ -2,6 +2,7 @@ import React from 'react'
 
 function OneBook(props) {
     const {book, onMoveBook} = props
+    const currentShelf = book.shelf!== undefined ? book.shelf : 'none'
     return (
         <li key={book.id} className="book-list-item">
             <div className="book">
@@ -9,11 +10,11 @@ function OneBook(props) {
                     <div className="book-cover" style={{
                         width: 128, 
                         height: 193, 
-                        backgroundImage: `url(${book.imageLinks.thumbnail})` 
+                        backgroundImage: `url(${book.imageLinks === undefined ? 'http://via.placeholder.com/128x193?text=No%20Cover' : book.imageLinks.thumbnail })` 
                     }}></div>
                     <div className="book-shelf-changer">
                         <select 
-                            value={book.shelf} 
+                            value={currentShelf} 
                             onChange={(chosen) => onMoveBook(book, chosen.target.value)}
                         >
                             <option value="none" disabled>Move to...</option>

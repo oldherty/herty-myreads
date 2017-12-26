@@ -3,6 +3,7 @@ import React from 'react'
 function OneBook(props) {
     const {book, onMoveBook} = props
     const currentShelf = book.shelf!== undefined ? book.shelf : 'none'
+    
     return (
         <li key={book.id} className="book-list-item">
             <div className="book">

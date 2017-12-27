@@ -82,7 +82,7 @@ class SearchBooks extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                    {bookResults !== undefined && bookResults.map( (result) => (
+                    {!bookResults.error && bookResults.map( (result) => (
                         <OneBook key={result.id} book={result} onMoveBook={onMoveBook} />
                     ))}
                     </ol>

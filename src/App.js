@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom'
 import Bookshelves from './Bookshelves.js'
 import SearchBooks from './BookSearch.js'
 import * as BooksAPI from './BooksAPI'
+import { Switch } from 'react-router-dom'
+import FourOFourPage from './404.js'
 
 class BooksApp extends Component {
     state = {
@@ -30,19 +32,22 @@ class BooksApp extends Component {
     render() {
         return (
             <div className="app">
-                <Route exact path='/' render={() => (
-                    <Bookshelves 
-                        books={this.state.books} 
-                        onMoveBook={this.changeShelf} 
-                    />
-                )} />
-                <Route path='/search' render={({ history }) => (
-                    <SearchBooks 
-                        books={this.state.books} 
-                        onMoveBook={this.changeShelf} 
-                        searchTerms={this.state.searchTerms} 
-                    />
-                )} />
+                <Switch>
+                    <Route exact path='/' render={() => (
+                        <Bookshelves 
+                            books={this.state.books} 
+                            onMoveBook={this.changeShelf} 
+                        />
+                    )} />
+                    <Route path='/search' render={({ history }) => (
+                        <SearchBooks 
+                            books={this.state.books} 
+                            onMoveBook={this.changeShelf} 
+                            searchTerms={this.state.searchTerms} 
+                        />
+                    )} />
+                    <Route component={FourOFourPage} />
+                </Switch>
             </div>
         )
     }
